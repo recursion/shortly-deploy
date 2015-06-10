@@ -1,6 +1,7 @@
 var app = require('./server-config.js');
 
-var port = 4568;
+// var port = 4568;
+var port = process.enc.PORT || 4568;
 
 app.listen(port);
 
