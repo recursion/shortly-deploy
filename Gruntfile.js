@@ -41,6 +41,7 @@ var js = {
     jshint: {
       files: [
         // Add filespec list here
+        'test/ServerSpec.js',
       ],
       options: {
         force: 'true',
@@ -53,6 +54,15 @@ var js = {
     },
 
     cssmin: {
+      target: {
+        files: [{
+          expand: true,
+          cwd: 'public/',
+          src: ['*.css', '!*.min.css'],
+          dest: 'public/dist/',
+          ext: '.min.css'
+        }]
+      }
     },
 
     watch: {
@@ -110,12 +120,14 @@ var js = {
 
   grunt.registerTask('build', [
     'concat',
-    'uglify'
+    'uglify',
+    'cssmin'
   ]);
 
   grunt.registerTask('upload', function(n) {
     if(grunt.option('prod')) {
       // add your production server task here
+
     } else {
       grunt.task.run([ 'server-dev' ]);
     }
@@ -123,6 +135,7 @@ var js = {
 
   grunt.registerTask('deploy', [
     // add your deploy tasks here
+
   ]);
 
 

@@ -7,6 +7,9 @@ iisnode.yml
 # Icon must ends with two \r.
 Icon
 
+# Grunt files
+public/dist
+
 # npm
 node_modules/
 
