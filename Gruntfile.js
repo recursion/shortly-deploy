@@ -1,8 +1,19 @@
 module.exports = function(grunt) {
 
+var js = {
+  src: ['public/client/*.js'],
+  dest: 'public/dist/app.js',
+  minifiedDest: 'public/dist/app.min.js',
+};
+
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+
     concat: {
+      dist: {
+        src: js.src,
+        dest: js.dest,
+      },
     },
 
     mochaTest: {
@@ -21,6 +32,10 @@ module.exports = function(grunt) {
     },
 
     uglify: {
+      build: {
+        src: js.dest,
+        dest: js.minifiedDest,
+      }
     },
 
     jshint: {
@@ -94,6 +109,8 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build', [
+    'concat',
+    'uglify'
   ]);
 
   grunt.registerTask('upload', function(n) {
