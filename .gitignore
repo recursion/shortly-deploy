@@ -10,6 +10,8 @@ Icon
 # npm
 node_modules/
 
+# sqlite3 schema
+db/shortly.sqlite
 
 # Floobits
 .floo
