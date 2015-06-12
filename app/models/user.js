@@ -5,7 +5,8 @@ var Promise = require('bluebird');
 
 var userSchema = db.Schema({
   username: { type: String, required: true, index: { unique: true } },
-  password: { type: String, required: true }
+  password: { type: String, required: true },
+  createdOn: { type : Date, default: Date.now }
 });
 
 // attach methods to schema
