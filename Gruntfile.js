@@ -41,10 +41,12 @@ var js = {
     jshint: {
       files: [
         // Add filespec list here
-        'test/ServerSpec.js',
+        'app/*.js',
+        'app/**/*.js',
+        'public/client/*.js'
       ],
       options: {
-        force: 'true',
+        //force: 'true',
         jshintrc: '.jshintrc',
         ignores: [
           'public/lib/**/*.js',
@@ -84,6 +86,7 @@ var js = {
 
     shell: {
       prodServer: {
+        command: 'git push azure master'
       }
     },
   });
@@ -114,9 +117,7 @@ var js = {
   // Main grunt tasks
   ////////////////////////////////////////////////////
 
-  grunt.registerTask('test', [
-    'mochaTest'
-  ]);
+  grunt.registerTask('test', ['mochaTest']);
 
   grunt.registerTask('build', [
     'concat',
@@ -124,19 +125,15 @@ var js = {
     'cssmin'
   ]);
 
-  grunt.registerTask('upload', function(n) {
+  grunt.registerTask('upload', ['shell']);
+
+  grunt.registerTask('deploy', function() {
     if(grunt.option('prod')) {
       // add your production server task here
+      grunt.task.run([ 'jshint', 'test', 'upload' ]);
 
     } else {
-      grunt.task.run([ 'server-dev' ]);
+      grunt.task.run([ 'build', 'server-dev' ]);
     }
   });
-
-  grunt.registerTask('deploy', [
-    // add your deploy tasks here
-
-  ]);
-
-
 };
